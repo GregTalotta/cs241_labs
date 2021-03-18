@@ -1,0 +1,5 @@
+{
+    "board": "arduino:avr:uno",
+    "sketch": "run_thermistor.ino",
+    "port": "COM3"
+}
