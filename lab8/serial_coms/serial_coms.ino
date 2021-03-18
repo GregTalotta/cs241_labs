@@ -6,8 +6,9 @@ const String available_commands[nCommands] = {
 };
 
 void help(){
+  Serial.print("\n");
   for(int i = 0; i < nCommands; ++i){
-    Serial.print(i+": " + available_commands[i]);
+    Serial.print(available_commands[i]+"\n");
   }
   return;
 }
@@ -18,7 +19,7 @@ void ok(){
 }
 
 void handleCommand(String command){
-  Serial.print("Received Command: " + command);
+  Serial.print("Received Command: " + command+ "\n");
   if(command == "help"){
     help();
   }
