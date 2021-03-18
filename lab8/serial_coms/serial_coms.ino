@@ -1,8 +1,31 @@
 // Greg Talotta lab 8
+const int nCommands = 2;
+const String available_commands[nCommands] = {
+  "help\n\tprints all available commands",
+  "ok\n\tprints OK"
+};
+
+void help(){
+  Serial.print("\n");
+  for(int i = 0; i < nCommands; ++i){
+    Serial.print(available_commands[i]+"\n");
+  }
+  return;
+}
+
+void ok(){
+  Serial.print("OK");
+  return;
+}
 
 void handleCommand(String command){
-  Serial.print("Received Command: " + command);
-
+  Serial.print("Received Command: " + command+ "\n");
+  if(command == "help"){
+    help();
+  }
+  if(command == "ok"){
+    ok();
+  }
   return;
 }
 
