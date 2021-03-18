@@ -1,8 +1,9 @@
 // Greg Talotta lab 8
-const int nCommands = 2;
+const int nCommands = 3;
 const String available_commands[nCommands] = {
     "help\n\tprints all available commands",
-    "ok\n\tprints OK"};
+    "ok\n\tprints OK",
+    "A<digit>\n\treads the voltage on that anolog pin"};
 
 void help()
 {
@@ -22,17 +23,19 @@ void ok()
 
 void voltageRead(int aPin)
 {
-  int v = analogRead(aPin);   // raw 0-1023 analog-to-digital reading
-  float V = 5.0 * v / 1023.0; // scale to float volts
-  Serial.print("Voltage on ");
-  Serial.print(aPin);
-  Serial.print(": ");
-  Serial.println(V); // print voltage (in volts)
+  int v = analogRead(aPin); // raw 0-1023 analog-to-digital reading
+  //float V = 5.0 * v / 1023.0; // scale to float volts
+  Serial.print("Voltage is ");
+  Serial.println(v); // print voltage (in volts)
 }
 
-int parse(char pos)
+int parsePin(char pos)
 {
   int i = (pos - '0') + A0;
+  if ((i < A0) || (i > A5))
+  {
+    i = -1;
+  }
   return i;
 }
 
@@ -49,8 +52,11 @@ void handleCommand(String command)
   }
   if (command[0] == 'A')
   {
-    int pin = parse(command[1]);
-    voltageRead(pin);
+    int pin = parsePin(command[1]);
+    if (pin != -1)
+    {
+      voltageRead(pin);
+    }
   }
   return;
 }
