@@ -6,6 +6,18 @@ void handleCommand(String cmd) {
   else if (cmd == "ok") {
     Serial.println("OK");
   }
+  else if (cmd[0] == 'A' && cmd.length() == 2) {
+    int digit = cmd[1] - '0';
+    if (digit >= 0 && digit <= 5) {
+      int v = analogRead(digit + A0);
+      float realV = 5.0 * v / 1023.0;
+      Serial.println(v);
+      Serial.println(realV);
+    }
+    else {
+      Serial.println("Unrecognized analog pin: " + cmd);
+    }
+  }
   else {
     Serial.println("Unrecognized command: " + cmd);
   }
