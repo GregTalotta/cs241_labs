@@ -1,9 +1,17 @@
 // Greg Talotta lab 8
-const int nCommands = 3;
+const int nCommands = 11;
 const String available_commands[nCommands] = {
     "help\n\tprints all available commands",
     "ok\n\tprints OK",
-    "A<digit>\n\treads the voltage on that anolog pin"};
+    "A<digit>\n\treads the voltage on that anolog pin",
+    "on\n\tturn the pin 13 debug pin on",
+    "off\n\tturn the pin 13 debug pin off",
+    "xs\n\tprint x 10000 times",
+    "baud\n\tChange the serial baud rate to 19200, and print \"are you reading this?\"",
+    "grüning\n\ttest a unicode character",
+    "fill ram\n\tallocates 512 bytes of ram and prints the ptr as long",
+    "ptr null\n\tprints what is stored at NULL",
+    "array\n\tuses new to create an array size 3, then prints the 100th element"};
 
 void help()
 {
@@ -17,7 +25,7 @@ void help()
 
 void ok()
 {
-  Serial.print("OK");
+  Serial.println("OK");
   return;
 }
 
@@ -41,7 +49,8 @@ int parsePin(char pos)
 
 void handleCommand(String command)
 {
-  Serial.print("Received Command: " + command + "\n");
+  char *ptr1;
+  Serial.println("Received Command: " + command);
   if (command == "help")
   {
     help();
@@ -58,12 +67,58 @@ void handleCommand(String command)
       voltageRead(pin);
     }
   }
+  if (command == "off")
+  {
+    digitalWrite(13, LOW);
+  }
+  if (command == "on")
+  {
+    digitalWrite(13, HIGH);
+  }
+  if (command == "xs")
+  {
+    for (int i = 0; i < 10000; ++i)
+    {
+      Serial.print("x");
+    }
+  }
+  if (command == "grüning")
+  {
+    for (int i = 0; i < command.length(); ++i)
+    {
+      Serial.print(command[i], HEX);
+    }
+    Serial.println();
+  }
+  if (command == "ptr null")
+  {
+    int *ptr = NULL;
+    Serial.println(*ptr);
+  }
+  if (command == "fill ram")
+  {
+    ptr1 = new char[512];
+    Serial.println((long)ptr1);
+  }
+  if (command == "array")
+  {
+    char *ptr2 = new char[3];
+    Serial.println(ptr2[100]);
+    delete (ptr2);
+  }
+  if (command == "baud")
+  {
+    Serial.end();
+    Serial.begin(19200);
+    Serial.println("Are you reading this?");
+  }
   return;
 }
 
 void setup()
 {
   Serial.begin(9600);
+  pinMode(13, OUTPUT);
   Serial.println("Command demo!");
 }
 
