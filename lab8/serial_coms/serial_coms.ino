@@ -1,5 +1,3 @@
-
-
 void handleCommand(String command){
   Serial.print("Received Command: " + command);
 
