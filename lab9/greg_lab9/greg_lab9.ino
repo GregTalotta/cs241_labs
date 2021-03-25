@@ -45,7 +45,7 @@ void help()
 void corrLstr()
 {
   char *x = "hello\n";
-  corruptMemory(&x, 7, 10000);
+  corruptMemory(x, 7, 10000);
   Serial.println(x);
   return;
 }
@@ -53,7 +53,7 @@ void corrLstr()
 char *gstr = "gello\n";
 void corrGstr()
 {
-  corruptMemory(&gstr, 7, 10000);
+  corruptMemory(gstr, 7, 10000);
   Serial.println(gstr);
   return;
 }
@@ -83,14 +83,14 @@ void corrGarr()
 void corrAllG()
 {
   void *address = (void *)0x256;
-  corruptMemory(&address, 300, 10000);
+  corruptMemory(address, 300, 10000);
   return;
 }
 
 void corrAll()
 {
   void *address = (void *)0x2000;
-  corruptMemory(&address, 300, 10000);
+  corruptMemory(address, 300, 10000);
   return;
 }
 void handleCommand(String command)
