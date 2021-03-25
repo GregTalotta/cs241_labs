@@ -132,7 +132,7 @@ void setup()
 {
   Serial.begin(9600);
   Serial.println("Enter \"help\" for commands");
-  randomSeed(1234);
+  randomSeed(4321);
 }
 
 String buffer;
