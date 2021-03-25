@@ -33,11 +33,10 @@ void loop()
   {
     for (int i = 0; i < 3000; ++i)
     {
-      int x = 0;
+      unsigned int x = 0;
       corruptMemory(&x, sizeof(x), 10000);
       if (x != 0)
       {
-        Serial.print("X is: ");
         Serial.println(x);
       }
     }
