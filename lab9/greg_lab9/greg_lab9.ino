@@ -119,11 +119,11 @@ void handleCommand(String command)
   }
   if (command == "AllG")
   {
-    corrLarr();
+    corrAllG();
   }
   if (command == "All")
   {
-    corrLarr();
+    corrAll();
   }
   return;
 }
