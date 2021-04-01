@@ -14,7 +14,7 @@ void loop()
     digitalWrite(relayPin,HIGH);
     swap = !swap;
   }else{
-    digitalWrite(relayPin,LOW);
+    //digitalWrite(relayPin,LOW);
     swap = !swap;
   }
   delay(300);
