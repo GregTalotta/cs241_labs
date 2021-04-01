@@ -1,21 +1,18 @@
 // Greg Talotta lab 10
-int relayPin = 12;
+int comPin = 12;
+int ossPin = 8;
 void setup()
 {
   Serial.begin(9600);
-  pinMode(relayPin,OUTPUT);
-  digitalWrite(relayPin,LOW);
+  pinMode(comPin, OUTPUT);
+  digitalWrite(comPin, HIGH);
+  pinMode(ossPin, INPUT);
 }
 
-bool swap = true;
+
+unsigned long duration = 0;
 void loop()
 {
-  if(swap){
-    digitalWrite(relayPin,HIGH);
-    swap = !swap;
-  }else{
-    //digitalWrite(relayPin,LOW);
-    swap = !swap;
-  }
-  delay(300);
+    duration = pulseIn(ossPin, LOW);
+    Serial.println(duration);
 }
