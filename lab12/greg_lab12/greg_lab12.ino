@@ -1,18 +1,23 @@
-// Greg Talotta lab 10
-int comPin = 12;
-int ossPin = 8;
+//greg lab 12
+int fetPin = 3;
+
 void setup()
 {
   Serial.begin(9600);
-  pinMode(comPin, OUTPUT);
-  digitalWrite(comPin, HIGH);
-  pinMode(ossPin, INPUT);
+  pinMode(fetPin, OUTPUT);
 }
-
-
-unsigned long duration = 0;
+float V = 0.0;
 void loop()
 {
-    duration = pulseIn(ossPin, LOW);
-    Serial.println(duration);
+  if (V < 3.7)
+  {
+    digitalWrite(fetPin, HIGH);
+  }
+  else
+  {
+    digitalWrite(fetPin, LOW);
+  }
+  int rawVoltage = analogRead(A0);
+  V = rawVoltage * (5.0 / 1023);
+  Serial.println(V);
 }
